@@ -5,7 +5,9 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rename": "node ./file/rename/index.js"
+    "file-rename": "node ./file/rename/index.js",
+    "file-delete": "node ./file/delete/index.js",
+    "file-exists": "node ./file/exists/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/xiaobxia/node-js/issues"
   },
-  "homepage": "https://github.com/xiaobxia/node-js#readme"
+  "homepage": "https://github.com/xiaobxia/node-js#readme",
+  "dependencies": {
+    "fs-extra": "^3.0.1"
+  }
 }
