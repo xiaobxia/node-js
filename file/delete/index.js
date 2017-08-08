@@ -26,37 +26,37 @@ const path = require('path')
  */
 
 const deleteFolderRecursive = function (path) {
-    fs.access(path, function (err) {
-        if (err) {
-            console.error(err);
-            return false;
+  fs.access(path, function (err) {
+    if (err) {
+      console.error(err);
+      return false;
+    }
+    fs.readdir(path, function (err, files) {
+      if (err) {
+        console.error(err);
+        return false;
+      }
+      files.forEach(function (file, index) {
+        let curPath = path + "/" + file;
+        if (fs.statSync(curPath).isDirectory()) {
+          deleteFolderRecursive(curPath);
+        } else { // delete file
+          fs.unlinkSync(curPath);
         }
-        fs.readdir(path, function (err, files) {
-            if (err) {
-                console.error(err);
-                return false;
-            }
-            files.forEach(function (file, index) {
-                let curPath = path + "/" + file;
-                if (fs.statSync(curPath).isDirectory()) {
-                    deleteFolderRecursive(curPath);
-                } else { // delete file
-                    fs.unlinkSync(curPath);
-                }
-            });
-            fs.rmdirSync(path);
-        })
+      });
+      fs.rmdirSync(path);
     })
+  })
 };
 
 //删除文件夹和文件都可以(也能删除非空文件夹)
 fs.remove(path.join(__dirname, '/test/'))
-    .then(() => {
-        console.log('success!');
-    })
-    .catch(err => {
-        console.error(err)
-    })
+  .then(() => {
+    console.log('success!');
+  })
+  .catch(err => {
+    console.error(err)
+  })
 
 
 
